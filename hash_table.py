@@ -1,14 +1,5 @@
 
 
-class Pair:
-    def __init__(self, key, value):
-        self.key = key
-        self.value = value
-
-    def __str__(self):
-        return f'(key: {self.key}, value: {self.value})'
-
-
 class HashTable(object):
 
     def __init__(self, length=4):
@@ -19,37 +10,30 @@ class HashTable(object):
         """hash() is useful to transform strings into numeric values"""
         return hash(key) % self.length
 
-    def add(self, key, value) -> None:
+    def add(self, key) -> None:
         """
         :param key: any hashable
-        :param value: any
         :return: None
         """
-        pair = Pair(key, value)
-        index = self.hash(pair.key)
+        index = self.hash(key)
         if not self.table[index]:
-            self.table[index] = [pair]
-            return
-        for existing_pair in self.table[index]:
-            if existing_pair.key == pair.key:
-                existing_pair.value = pair.value
-                break
+            self.table[index] = [key]
         else:
-            self.table[index].append(pair)
+            self.table[index].append(key)
 
-    def __getitem__(self, key):
+    def get(self, key):
         """
         :param key: any hashable
-        :returns value associated to key
+        :returns index on which the item can be found in the hashtable
         :raises KeyError when key is not in hashtable
         """
         index = self.hash(key)
         if self.table[index] is None:
             raise KeyError(f'There are no elements for {key} in hashtable')
 
-        for existing_pair in self.table[index]:
-            if existing_pair.key == key:
-                return existing_pair.value
+        for existing_key in self.table[index]:
+            if existing_key == key:
+                return index
         raise KeyError(f'{key} does not appear in hashtable')
 
     def __str__(self):
@@ -59,7 +43,7 @@ class HashTable(object):
             try:
                 for x in self.table[idx]:
                     if x:
-                        pairs += str(x)
+                        pairs += str(x) + ','
             except TypeError:
                 pass
             finally:
@@ -69,12 +53,26 @@ class HashTable(object):
         return table_representation
 
 
+class SymbolTable(HashTable):
+    def add(self, key) -> None:
+        if not isinstance(key, str):
+            raise Exception('In symbol table, all keys must be strings')
+        super().add(key)
+
+    def get(self, key):
+        if not isinstance(key, str):
+            raise Exception('In symbol table, all keys must be strings')
+        return super().get(key)
+
+
 if __name__ == '__main__':
-    table = HashTable(7)
-    table.add(1, 5)
-    table.add(2, 10)
-    table.add(8, 20)
-    table.add(1, 23)
-    print(table[1])
-    print(table)
+
+    symbols = SymbolTable(2)
+    symbols.add("a")
+    symbols.add("b")
+    symbols.add("c")
+    print(symbols)
+    print(symbols.get('a'))
+
+
 
