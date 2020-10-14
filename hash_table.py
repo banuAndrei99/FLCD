@@ -21,24 +21,25 @@ class HashTable(object):
 
     def add(self, key, value) -> None:
         """
-        :param key: any
+        :param key: any hashable
         :param value: any
         :return: None
         """
         pair = Pair(key, value)
         index = self.hash(pair.key)
-        if self.table[index]:
-            for existing_pair in self.table[index]:
-                if existing_pair.key == pair.key:
-                    existing_pair.value = pair.value
-                    break
-            else:
-                self.table[index].append(pair)
-        else:
+        if not self.table[index]:
             self.table[index] = [pair]
+            return
+        for existing_pair in self.table[index]:
+            if existing_pair.key == pair.key:
+                existing_pair.value = pair.value
+                break
+        else:
+            self.table[index].append(pair)
 
     def __getitem__(self, key):
         """
+        :param key: any hashable
         :returns value associated to key
         :raises KeyError when key is not in hashtable
         """
