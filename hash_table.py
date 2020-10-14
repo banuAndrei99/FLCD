@@ -6,7 +6,7 @@ class HashTable(object):
         self.table = [None] * length
         self.length = length
 
-    def hash(self, key):
+    def __hash(self, key):
         """hash() is useful to transform strings into numeric values"""
         return hash(key) % self.length
 
@@ -15,7 +15,7 @@ class HashTable(object):
         :param key: any hashable
         :return: None
         """
-        index = self.hash(key)
+        index = self.__hash(key)
         if not self.table[index]:
             self.table[index] = [key]
         else:
@@ -27,7 +27,7 @@ class HashTable(object):
         :returns index on which the item can be found in the hashtable
         :raises KeyError when key is not in hashtable
         """
-        index = self.hash(key)
+        index = self.__hash(key)
         if self.table[index] is None:
             raise KeyError(f'There are no elements for {key} in hashtable')
 
