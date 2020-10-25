@@ -1,0 +1,13 @@
+main{
+	int a = 36, b = 30, gcd;
+
+	while(b != 0){
+		gcd = a % b;
+		a = b;
+		b = gcd;
+	}
+
+	gcd = a;
+	
+	out(gcd);
+}

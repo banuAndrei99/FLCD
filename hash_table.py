@@ -2,7 +2,7 @@
 
 class HashTable(object):
 
-    def __init__(self, length=4):
+    def __init__(self, length=7):
         self.table = [None] * length
         self.length = length
 
@@ -33,7 +33,7 @@ class HashTable(object):
 
         for existing_key in self.table[index]:
             if existing_key == key:
-                return index
+                return index, self.table[index].index(key)
         raise KeyError(f'{key} does not appear in hashtable')
 
     def __str__(self):
@@ -65,14 +65,29 @@ class SymbolTable(HashTable):
         return super().get(key)
 
 
+class ConstantsTable(HashTable):
+    def add(self, key) -> None:
+        if not isinstance(key, (int, str)):
+            raise Exception('In symbol table, all keys must be int')
+        super().add(key)
+
+    def get(self, key):
+        if not isinstance(key,  (int, str)):
+            raise Exception('In symbol table, all keys must be int')
+        return super().get(key)
+
+
 if __name__ == '__main__':
 
-    symbols = SymbolTable(2)
-    symbols.add("a")
-    symbols.add("b")
-    symbols.add("c")
+    symbols = ConstantsTable(2)
+    symbols.add(5)
+    symbols.add(4)
+    symbols.add(3)
+    symbols.add(4)
     print(symbols)
-    print(symbols.get('a'))
+    print(symbols.get(3))
+    i, idx = symbols.get(3)
+    print(symbols.table[i][idx])
 
 
 
