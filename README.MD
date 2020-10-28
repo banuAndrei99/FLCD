@@ -49,3 +49,85 @@
     Adds a new entry in pif.
     - pre: None
     - post: pif is modified or error is raised.
+
+## Input example:
+```python
+main{
+	int a = 36, b = 30, gcd;
+	while(b != 0){
+		gcd = a % b;
+		a = b;
+		b = gcd;
+	}
+	gcd = a;
+	out(gcd);
+}
+```
+## Output:
+ANALYZING p2
+
+Symbol Table:
+0 --> []
+1 --> [gcd,]
+2 --> []
+3 --> [a,b,]
+4 --> []
+5 --> []
+6 --> []
+
+Constant Table:
+0 --> []
+1 --> []
+2 --> []
+3 --> []
+4 --> [36,0,]
+5 --> [30,]
+6 --> []
+PIF:
+main | 0
+{ | 4
+int | 5
+ID | (3, 0)
+= | 11
+CONST | (4, 0)
+, | 15
+ID | (3, 1)
+= | 19
+CONST | (5, 0)
+, | 23
+ID | (1, 0)
+; | 28
+while | 29
+( | 34
+ID | (3, 1)
+!= | 37
+CONST | (4, 1)
+) | 41
+{ | 42
+ID | (1, 0)
+= | 47
+ID | (3, 0)
+% | 51
+ID | (3, 1)
+; | 54
+ID | (3, 0)
+= | 57
+ID | (3, 1)
+; | 60
+ID | (3, 1)
+= | 63
+ID | (1, 0)
+; | 68
+} | 69
+ID | (1, 0)
+= | 74
+ID | (3, 0)
+; | 77
+out | 78
+( | 81
+ID | (1, 0)
+) | 85
+; | 86
+} | 87
+
+VERDICT: LEXICALLY CORRECT
