@@ -1,0 +1,51 @@
+SYNTAX:
+
+program ::= main "{" declist ";" stmtlist ";" "}"
+
+decllist ::= declaration | declaration ";" decllist
+
+declaration ::= type initialization{,initialization}
+
+type ::= primitive_type["[]"]
+
+primitive_type ::= "int" | "char"
+
+initialization ::= IDENTIFIER[ "[" number "]" ] [ "=" expression | array_expression]
+
+number::= ["+" | "-"] "0" | non_zero_digit{digit}
+
+digit ::=  "0"  | "1" |...| "9"
+
+non_zero_digit ::= | "1" |...| "9"
+
+cmpdstmt ::= "{" stmtlist "}"
+
+stmtlist ::= stmt | stmt ";" stmtlist
+
+stmt ::= simplestmt | structstmt
+
+simplestmt ::= assignment | iostmt
+
+assignment ::= IDENTIFIER "=" expression
+
+array_expression ::= "[" EMPTY | expression{","expression} "]"
+
+EMPTY ::= ""
+
+expression ::= expression "+" | "-" term | term
+
+term ::= term "*" | "/" factor | factor
+
+factor ::= "(" expression ")" | IDENTIFIER
+
+iostmt ::= "in" | "out" "(" IDENTIFIER ")"
+
+structstmt ::= ifstmt | whilestmt | cmpdstmt
+
+ifstmt ::= "if(" condition ")" "{" stmt "}" [else "{" stmt "}"]
+
+whilestmt ::= "while(" condition ")" "{" stmt "}"
+
+condition ::= expression RELATION expression
+
+RELATION ::= "<" | "<=" | "==" | "!=" | ">=" | ">"
