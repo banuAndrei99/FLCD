@@ -66,7 +66,7 @@ main{
 ## Output:
 ANALYZING p2
 
-Symbol Table:
+####Symbol Table:
 0 --> []
 1 --> [gcd,]
 2 --> []
@@ -75,7 +75,7 @@ Symbol Table:
 5 --> []
 6 --> []
 
-Constant Table:
+####Constant Table:
 0 --> []
 1 --> []
 2 --> []
@@ -83,7 +83,7 @@ Constant Table:
 4 --> [36,0,]
 5 --> [30,]
 6 --> []
-PIF:
+####PIF:
 main | 0
 { | 4
 int | 5
@@ -130,4 +130,4 @@ ID | (1, 0)
 ; | 86
 } | 87
 
-VERDICT: LEXICALLY CORRECT
+###VERDICT: LEXICALLY CORRECT
