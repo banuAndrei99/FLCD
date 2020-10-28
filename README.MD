@@ -51,7 +51,7 @@
     - post: pif is modified or error is raised.
 
 ## Input example:
-```python
+```c++
 main{
 	int a = 36, b = 30, gcd;
 	while(b != 0){
@@ -66,7 +66,8 @@ main{
 ## Output:
 ANALYZING p2
 
-####Symbol Table:
+#### Symbol Table:
+```
 0 --> []
 1 --> [gcd,]
 2 --> []
@@ -74,8 +75,9 @@ ANALYZING p2
 4 --> []
 5 --> []
 6 --> []
-
-####Constant Table:
+```
+#### Constant Table:
+```
 0 --> []
 1 --> []
 2 --> []
@@ -83,7 +85,9 @@ ANALYZING p2
 4 --> [36,0,]
 5 --> [30,]
 6 --> []
-####PIF:
+```
+#### PIF:
+```
 main | 0
 { | 4
 int | 5
@@ -129,5 +133,5 @@ ID | (1, 0)
 ) | 85
 ; | 86
 } | 87
-
-###VERDICT: LEXICALLY CORRECT
+```
+#### VERDICT: LEXICALLY CORRECT
