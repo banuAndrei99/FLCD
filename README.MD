@@ -1,3 +1,49 @@
+# Finite Automaton
+## __print_states()
+    Prints the states of the automaton.
+   - pre: states are present in input json
+   - post: None
+
+## __print_alphabet()
+    Prints the alphabet of the automaton.
+   - pre: alphabet is present in input json
+   - post: None
+
+## __print_final_states()
+    Prints the final states of the automaton.
+   - pre: final states are present in input json
+   - post: None
+
+## __print_transitions()
+    Prints the transitions of the automaton.
+   - pre: states are transitions in input json
+   - post: None
+
+## check(sequence, current_state)
+    Checks if <sequence> can be obtained starting from <current_state>.
+   - pre: None
+   - post: None
+
+## check_wrapper(sequence)
+    Initializes the parameters needed for check() method and print a message based on the result.
+   - pre: None
+   - post: None
+
+## Example:
+```
+1. Print states
+2. Print alphabet
+3. Print final states
+4. Print transition dictionary
+5. Check sequence
+6. Close
+
+>>> 5
+
+Enter a sequence: 110
+everything OK
+```
+
 # Lexical Analyzer
 ## __set_program(program: string)
     Reads the text content of the program and formats it.

@@ -1,6 +1,6 @@
 import json
 from menu import Menu
-from anytree import Node, RenderTree, find, findall
+from anytree import Node, RenderTree, find
 
 
 class AutomatonNode(Node):
@@ -23,13 +23,11 @@ class FiniteAutomaton:
         self.alphabet = data["alphabet"]
         self.transitions = data['transitions']
         self.start_node = None
-        self.__build_tree()
         self.menu = Menu(options=[
             ("Print states", self.__print_states),
             ("Print alphabet", self.__print_alphabet),
             ("Print final states", self.__print_final_states),
             ("Print transition dictionary", self.__print_transitions),
-            ("Print transition tree", self.__print_transition_tree),
             ("Check sequence", self.check_wrapper),
             ("Close", Menu.CLOSE)
         ])
@@ -70,21 +68,6 @@ class FiniteAutomaton:
             return False
         else:
             return any([self.check(sequence[1:], state) for state in possible_future_states])
-
-    def __build_tree(self):
-        for state, transitions in self.transitions.items():
-            if self.start_node:
-                node = find(self.start_node, filter_=lambda n: n.name == state) or AutomatonNode(name=state, parent=None)
-            else:
-                node = AutomatonNode(name=state, parent=None)
-            if state == self.start_state:
-                self.start_node = node
-            for t, s in transitions.items():
-                AutomatonNode(name=s, parent=node, transition=t)
-
-    def __print_transition_tree(self):
-        for pre, _, node in RenderTree(self.start_node):
-            print("%s%s (%s)" % (pre, node.name, node.transition or None))
 
 
 if __name__ == '__main__':
