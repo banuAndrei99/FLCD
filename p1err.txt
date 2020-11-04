@@ -1,5 +1,5 @@
 main {
-	int a, b, c, max = a;
+	int a, b, c, max = 'a';
 
 
 	if ($b > max) {
