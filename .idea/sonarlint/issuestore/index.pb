@@ -24,3 +24,7 @@ token.json,0\3\0359594a79a57d9a192bcb66eb6f39d3ebcb9e43
 	README.MD,9\6\968e80af9562e09cebe594968b130076952eafe1
 9
 	Lexic.txt,e\2\e2d7d74d38abd6ad6816a08088143955f13d5999
+7
+FA.json,3\c\3cfc4a3cf5ea2338e38392683215208f4d9755c6
+C
+finite_automaton.py,4\7\470170027dae0dc0a8e8eaac01a29d1ed826bd07

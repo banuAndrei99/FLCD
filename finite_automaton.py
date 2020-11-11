@@ -1,20 +1,9 @@
 import json
 from menu import Menu
-from anytree import Node, RenderTree, find
-
-
-class AutomatonNode(Node):
-    def __init__(self, name, parent, transition=None):
-        super(AutomatonNode, self).__init__(name, parent)
-        self.parent = parent
-        self.transition = transition
-
-    def _post_detach(self, parent):
-        self.transition = None
 
 
 class FiniteAutomaton:
-    def __init__(self, file_path):
+    def __init__(self, file_path, deterministic=False):
         with open(file_path) as fh:
             data = json.load(fh)
         self.states = data["states"]
@@ -31,6 +20,11 @@ class FiniteAutomaton:
             ("Check sequence", self.check_wrapper),
             ("Close", Menu.CLOSE)
         ])
+        if deterministic:
+            self.__deterministic = True
+            for state, transition_map in self.transitions.items():
+                key_list = list(transition_map.keys())
+                assert key_list == list(dict.fromkeys(key_list))
 
     def __print_states(self):
         print(self.states)
@@ -62,6 +56,7 @@ class FiniteAutomaton:
         char = sequence[0]
         possible_future_states = []
         for transition, future_state in self.transitions[current_state].items():
+
             if transition == char:
                 possible_future_states.append(future_state)
         if not possible_future_states:
@@ -71,6 +66,5 @@ class FiniteAutomaton:
 
 
 if __name__ == '__main__':
-    fa = FiniteAutomaton("FA.json")
-    print(fa.transitions)
+    fa = FiniteAutomaton("FA.json", deterministic=True)
     fa.menu.open()
